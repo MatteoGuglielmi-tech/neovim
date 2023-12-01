@@ -1,11 +1,5 @@
 local M = {
   "neogitorg/neogit",
-  dependencies = {
-    "nvim-lua/plenary.nvim",         -- required
-    "nvim-telescope/telescope.nvim", -- optional
-    "sindrets/diffview.nvim",        -- optional
-    "ibhagwan/fzf-lua",              -- optional
-  },
   event = "VeryLazy",
 }
 
@@ -14,7 +8,7 @@ function M.config()
 
   require("neogit").setup {
     disable_signs = false,
-    -- disable_hint = true,
+    disable_hint = false,
     disable_context_highlighting = false,
     disable_commit_confirmation = true,
     disable_insert_on_commit = "auto",
@@ -68,43 +62,43 @@ function M.config()
     --   },
     -- },
     -- override/add mappings
-    -- mappings = {
-    --   -- modify status buffer mappings
-    --   status = {
-    --     ["q"] = "Close",
-    --     ["1"] = "Depth1",
-    --     ["2"] = "Depth2",
-    --     ["3"] = "Depth3",
-    --     ["4"] = "Depth4",
-    --     ["<tab>"] = "Toggle",
-    --     ["x"] = "Discard",
-    --     ["s"] = "Stage",
-    --     ["a"] = "StageUnstaged",
-    --     ["<c-s>"] = "StageAll",
-    --     ["u"] = "Unstage",
-    --     ["U"] = "UnstageStaged",
-    --     ["d"] = "DiffAtFile",
-    --     ["$"] = "CommandHistory",
-    --     ["<c-r>"] = "RefreshBuffer",
-    --     ["o"] = "GoToFile",
-    --     ["<enter>"] = "Toggle",
-    --     ["<c-v>"] = "VSplitOpen",
-    --     ["<c-x>"] = "SplitOpen",
-    --     ["<c-t>"] = "TabOpen",
-    --     ["?"] = "HelpPopup",
-    --     ["D"] = "DiffPopup",
-    --     ["p"] = "PullPopup",
-    --     ["r"] = "RebasePopup",
-    --     ["P"] = "PushPopup",
-    --     ["c"] = "CommitPopup",
-    --     ["L"] = "LogPopup",
-    --     ["Z"] = "StashPopup",
-    --     ["b"] = "BranchPopup",
-    --     -- ["<space>"] = "Stage",
-    --     -- Removes the default mapping of "s"
-    --     -- ["s"] = "",
-    --   },
-    -- },
+    mappings = {
+      --   -- modify status buffer mappings
+      status = {
+        --     ["q"] = "Close",
+        --     ["1"] = "Depth1",
+        --     ["2"] = "Depth2",
+        --     ["3"] = "Depth3",
+        --     ["4"] = "Depth4",
+        ["<tab>"] = "Toggle",
+        ["<enter>"] = "Toggle",
+        --     ["x"] = "Discard",
+        ["s"] = "Stage",
+        ["a"] = "StageUnstaged",
+        ["<c-s>"] = "StageAll",
+        ["u"] = "Unstage",
+        ["U"] = "UnstageStaged",
+      },
+      popup = {
+        --     ["d"] = "DiffAtFile",
+        --     ["$"] = "CommandHistory",
+        --     ["<c-r>"] = "RefreshBuffer",
+        --     ["o"] = "GoToFile",
+        --     ["<c-v>"] = "VSplitOpen",
+        --     ["<c-x>"] = "SplitOpen",
+        --     ["<c-t>"] = "TabOpen",
+        --     ["?"] = "HelpPopup",
+        --     ["D"] = "DiffPopup",
+        --     ["p"] = "PullPopup",
+        --     ["r"] = "RebasePopup",
+        ["P"] = "PushPopup",
+        ["c"] = "CommitPopup",
+        --     ["L"] = "LogPopup",
+        --     ["Z"] = "StashPopup",
+        --     ["b"] = "BranchPopup",
+        -- ["<space>"] = "Stage",
+      },
+    },
   }
 end
 

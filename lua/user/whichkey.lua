@@ -105,34 +105,41 @@ function M.config()
 
     g = {
       name = "Git",
+
+      -- NeoGit mappings for insspecting commits and diffs
+      g = { "<cmd>Neogit<cr>", "Lazygit" },
+      -- Fugitive mappings for git interaction
       a = { ":Gwrite<CR>", "Git add" },
       c = { ":Git commit<CR>", "Git commit" },
-      g = { "<cmd>Neogit<cr>", "Lazygit" },
       e = { ":GDelete<CR>", "Git delete" },
       p = { ":Git pull<CR>", "Git pull" },
       u = { ":Git push<CR>", "Git push" },
+      s = { ":G<CR>", "Git status" },
 
+      -- Gitsigns mappings for navigating hunks (blocks of changed lines)
       j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
       l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
       n = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
       r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
       R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-      s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+      S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
       U = {
         "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
         "Undo Stage Hunk",
       },
+      d = {
+        "<cmd>Gitsigns diffthis HEAD<cr>",
+        "Git Diff",
+      },
+
+      -- Telescope mappings for navigating git objects
       o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
       b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
       h = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
       C = {
         "<cmd>Telescope git_bcommits<cr>",
         "Checkout commit(for current file)",
-      },
-      d = {
-        "<cmd>Gitsigns diffthis HEAD<cr>",
-        "Git Diff",
       },
     },
     l = {

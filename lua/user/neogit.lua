@@ -37,66 +37,36 @@ function M.config()
     integrations = {
       diffview = true,
     },
-    -- Setting any section to `false` will make the section not render at all
-    -- sections = {
-    --   untracked = {
-    --     folded = false,
-    --   },
-    --   unstaged = {
-    --     folded = false,
-    --   },
-    --   staged = {
-    --     folded = false,
-    --   },
-    --   stashes = {
-    --     folded = true,
-    --   },
-    --   unpulled = {
-    --     folded = true,
-    --   },
-    --   unmerged = {
-    --     folded = false,
-    --   },
-    --   recent = {
-    --     folded = true,
-    --   },
-    -- },
     -- override/add mappings
     mappings = {
       --   -- modify status buffer mappings
       status = {
-        --     ["q"] = "Close",
-        --     ["1"] = "Depth1",
-        --     ["2"] = "Depth2",
-        --     ["3"] = "Depth3",
-        --     ["4"] = "Depth4",
+        -- NOTE:
+        -- "{" : Goto previous hunk
+        -- "}" : Goto next hunk
         ["<tab>"] = "Toggle",
         ["<enter>"] = "Toggle",
-        --     ["x"] = "Discard",
-        ["s"] = "Stage",
         ["a"] = "StageUnstaged",
-        ["<c-s>"] = "StageAll",
+        ["q"] = "Close",
+        ["s"] = "Stage",
+        ["S"] = "StageAll",
         ["u"] = "Unstage",
         ["U"] = "UnstageStaged",
+        ["x"] = "Discard",
       },
       popup = {
-        --     ["d"] = "DiffAtFile",
-        --     ["$"] = "CommandHistory",
-        --     ["<c-r>"] = "RefreshBuffer",
-        --     ["o"] = "GoToFile",
-        --     ["<c-v>"] = "VSplitOpen",
-        --     ["<c-x>"] = "SplitOpen",
-        --     ["<c-t>"] = "TabOpen",
-        --     ["?"] = "HelpPopup",
-        --     ["D"] = "DiffPopup",
+        ["?"] = "HelpPopup",
+        ["f"] = "FetchPopup",
         ["p"] = "PullPopup",
-        --     ["r"] = "RebasePopup",
         ["P"] = "PushPopup",
+        ["X"] = "FetchPopup",
+        ["m"] = "MergePopup",
+        ["v"] = "RevertPopup",
+        ["M"] = "RemotePopup",
+        ["r"] = "RebasePopup",
         ["c"] = "CommitPopup",
-        --     ["L"] = "LogPopup",
-        --     ["Z"] = "StashPopup",
-        --     ["b"] = "BranchPopup",
-        -- ["<space>"] = "Stage",
+        ["Z"] = "StashPopup",
+        ["b"] = "BranchPopup",
       },
     },
   }

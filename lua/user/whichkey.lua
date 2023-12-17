@@ -58,32 +58,6 @@ function M.config()
       d = { "<cmd>Lazy debug<cr>", "Debug" },
     },
 
-    -- n = {
-    --   name = "Nostr",
-    --   k = { '<cmd>lua require("nostr").generate_keys()<cr>', "Generate Keys" },
-    --   a = { '<cmd>lua require("nostr").add_relay()<cr>', "Add Relay" },
-    --   r = { '<cmd>lua require("nostr").remove_relay()<cr>', "Remove Relay" },
-    --   l = { '<cmd>lua require("nostr").list_relays()<cr>', "List Relays" },
-    --   s = { '<cmd>lua require("nostr").set_active_relay()<cr>', "Set Active Relay" },
-    --   S = { '<cmd>lua require("nostr").publish_snippet()<cr>', "Publish Snippet" },
-    --   n = { '<cmd>lua require("nostr").publish_note()<cr>', "Publish Note" },
-    --   d = { '<cmd>lua require("nostr").decode()<cr>', "Decode" },
-    --   e = { '<cmd>lua require("nostr").encode()<cr>', "Encode" },
-    --   b = { '<cmd>lua require("nostr").publish_blog()<cr>', "Publish Blog" },
-    --   B = { '<cmd>lua require("nostr").publish_bounty()<cr>', "Publish Bounty" },
-    -- },
-
-    -- j = {
-    --   name = "JavaScript",
-    --   s = { '<cmd>lua require("package-info").show()<cr>', "Show package info" },
-    --   h = { '<cmd>lua require("package-info").hide()<cr>', "Hide package info" },
-    --   t = { '<cmd>lua require("package-info").toggle()<cr>', "Toggle package info" },
-    --   u = { '<cmd>lua require("package-info").update()<cr>', "Update package" },
-    --   d = { '<cmd>lua require("package-info").delete()<cr>', "Delete package" },
-    --   i = { '<cmd>lua require("package-info").install()<cr>', "Install package" },
-    --   v = { '<cmd>lua require("package-info").change_version()<cr>', "Change Version" },
-    -- },
-
     f = {
       name = "Find",
       -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -105,16 +79,15 @@ function M.config()
 
     g = {
       name = "Git",
-
-      -- NeoGit mappings for insspecting commits and diffs
+      -- Dealing with conflicts
+      d = {
+        name = "DiffView",
+        s = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff (Gitsigns)" },
+        d = { "<cmd>DiffviewOpen<CR>", "Diffview" },
+        C = { "<cmd>DiffviewClose<CR>", "DiffviewClose" },
+      },
+      -- NeoGit mappings for inspecting commits and diffs
       g = { "<cmd>Neogit<cr>", "Lazygit" },
-      -- Fugitive mappings for git interaction
-      a = { ":Gwrite<CR>", "Git add" },
-      c = { ":Git commit<CR>", "Git commit" },
-      e = { ":GDelete<CR>", "Git delete" },
-      p = { ":Git pull<CR>", "Git pull" },
-      u = { ":Git push<CR>", "Git push" },
-      s = { ":G<CR>", "Git status" },
 
       -- Gitsigns mappings for navigating hunks (blocks of changed lines)
       j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
@@ -128,19 +101,15 @@ function M.config()
         "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
         "Undo Stage Hunk",
       },
-      d = {
-        "<cmd>Gitsigns diffthis HEAD<cr>",
-        "Git Diff",
-      },
 
       -- Telescope mappings for navigating git objects
-      o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-      b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-      h = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-      C = {
-        "<cmd>Telescope git_bcommits<cr>",
-        "Checkout commit(for current file)",
-      },
+      --   o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+      --   b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+      --   h = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+      --   C = {
+      --     "<cmd>Telescope git_bcommits<cr>",
+      --     "Checkout commit(for current file)",
+      --   },
     },
     l = {
       name = "LSP",
@@ -150,7 +119,10 @@ function M.config()
       d = { "<cmd>TroubleToggle document_diagnostics<CR>", "Document diagnostics" }, -- document diagnostics from the builtin LSP client
       D = { "<cmd>TroubleToggle lsp_definitions<CR>", "Lsp Definitions" },           -- definitions of the word under the cursor
       -- e = { "<cmd>Telescope quickfix<CR>", "Telescope Quickfix" },
-      -- f = { "<cmd>lua vim.lsp.buf.format({timeout_ms = 1000000})<cr>", "Manual format" },
+      f = {
+        "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
+        "Format",
+      },
       -- i = { "<cmd>Telescope lsp_implementations<CR>", "Show Implementation wuc" },   -- implementations of the word under the cursor
       I = { "<cmd>LspInfo<cr>", "Lsp Info" },
       l = { "<cmd>TroubleToggle lsp_type_definitions<CR>", "Lsp Type Definitions" }, -- type definitions of the word under the cursor

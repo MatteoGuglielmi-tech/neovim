@@ -1,10 +1,10 @@
 local M = {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
-    },
+  "jay-babu/mason-null-ls.nvim",
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    "williamboman/mason.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
+  },
 }
 
 M.tools = {
@@ -22,7 +22,6 @@ M.tools = {
   -- dap
   "debugpy",
   -- code actions
-  "cspell",
 }
 
 function M.config()

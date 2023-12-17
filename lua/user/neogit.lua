@@ -89,7 +89,7 @@ function M.config()
         --     ["<c-t>"] = "TabOpen",
         --     ["?"] = "HelpPopup",
         --     ["D"] = "DiffPopup",
-        --     ["p"] = "PullPopup",
+        ["p"] = "PullPopup",
         --     ["r"] = "RebasePopup",
         ["P"] = "PushPopup",
         ["c"] = "CommitPopup",

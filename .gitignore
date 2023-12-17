@@ -14,4 +14,4 @@ plugin/packer_compiled.lua
 *.json
 
 
-spell/
+./spell/

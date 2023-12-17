@@ -8,18 +8,16 @@ local M = {
 }
 
 M.servers = {
-          "bashls",
-          "jsonls",
-          "lua_ls",
-          "marksman",
-          "pyright",
-          "rust_analyzer",
-          "texlab",
-          "vimls",
-          "yamlls",
-          -- "html",
-          "jdtls",
-          "clangd",
+  "bashls",
+  "jsonls",
+  "lua_ls",
+  "marksman",
+  "pyright",
+  "rust_analyzer",
+  "texlab",
+  "vimls",
+  "yamlls",
+  "clangd",
 }
 
 function M.config()

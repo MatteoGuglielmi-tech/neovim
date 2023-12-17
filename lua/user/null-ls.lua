@@ -66,10 +66,6 @@ function M.config()
         filetypes = { "sh", "zsh" },
         argss = { "--format", "json1", "--source-path=$DIRNAME", "--external-sources", "-" },
       },
-      code_actions.cspell.with {
-        filetypes = { "markdown", "gitcommit", "text", "tex", "latex" },
-        args = { "--config", vim.fn.expand "~/.config/cspell/cspell.json", "--stdin" },
-      },
 
       -- COMPLETION
       completion.spell.with {

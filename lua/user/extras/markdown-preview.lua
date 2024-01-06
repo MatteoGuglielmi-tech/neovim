@@ -11,7 +11,7 @@ end
 function M.init()
   vim.g.mkdp_auto_start = 0
   vim.g.mkdp_filetypes = { "markdown" }
-  vim.g.mkdp_browser = 'safari'
+  vim.g.mkdp_browser = 'firefox'
   vim.g.mkdp_theme = 'dark'
 end
 

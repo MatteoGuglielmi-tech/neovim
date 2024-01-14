@@ -273,13 +273,13 @@ function M.config()
   }
 
   local m_mappings = {
-    m = { "<cmd>BookmarkToggle<cr>", "Toggle" },
-    j = { "<cmd>BookmarkNext<cr>", "Next" },
-    k = { "<cmd>BookmarkPrev<cr>", "Prev" },
-    c = { "<cmd>BookmarkClear<cr>", "Clear" },
-    l = { "<cmd>BookmarkList<cr>", "List" },
+    -- m = { "<cmd>BookmarkToggle<cr>", "Toggle" },
+    -- j = { "<cmd>BookmarkNext<cr>", "Next" },
+    -- k = { "<cmd>BookmarkPrev<cr>", "Prev" },
+    -- c = { "<cmd>BookmarkClear<cr>", "Clear" },
+    -- l = { "<cmd>BookmarkList<cr>", "List" },
     -- f = { "<cmd>FilemarkToggle<cr>", "Mark File" },
-    h = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
+    m = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
     ["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>', "Harpoon Next" },
     [","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', "Harpoon Prev" },
     -- l = { "<cmd>lua require('user.bfs').open()<cr>", "Buffers" },

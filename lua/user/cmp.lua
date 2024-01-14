@@ -48,7 +48,7 @@ function M.config()
   local cmp = require "cmp"
   local luasnip = require "luasnip"
   require("luasnip/loaders/from_vscode").lazy_load()
-  require("luasnip").filetype_extend("typescriptreact", { "html" })
+  require("luasnip").filetype_extend("typescript")
 
   local check_backspace = function()
     local col = vim.fn.col "." - 1
@@ -169,15 +169,15 @@ function M.config()
         end,
       },
       { name = "luasnip" },
-      { name = "cmp_tabnine" },
+      -- { name = "cmp_tabnine" },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
-      { name = "calc" },
+      -- { name = "calc" },
       { name = "emoji" },
       { name = "treesitter" },
       { name = "crates" },
-      { name = "tmux" },
+      -- { name = "tmux" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,

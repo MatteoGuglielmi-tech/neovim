@@ -5,19 +5,19 @@ require "user.autocmds"
 spec "user.colorscheme"
 spec "user.devicons"
 spec "user.treesitter"
-spec "user.mason"
-spec "user.schemastore"
 spec "user.lspconfig"
+-------------------------------
+-- the following are cool to understand where shortcuts such as "gd" bring you
 spec "user.navic"
 spec "user.breadcrumbs"
+-------------------------------
+spec "user.cmp"
 spec "user.null-ls"
-spec "user.illuminate"
+spec "user.illuminate" -- highlight all instances of word under cursor
 spec "user.telescope"
-spec "user.telescope-tabs"
 spec "user.nvimtree"
 spec "user.lualine"
 spec "user.whichkey"
-spec "user.cmp"
 spec "user.autopairs"
 spec "user.comment"
 spec "user.gitsigns"
@@ -25,46 +25,29 @@ spec "user.neogit"
 spec "user.diffview"
 spec "user.indentline"
 spec "user.alpha"
-spec "user.netrw"
-spec "user.project"
+spec "user.netrw" -- fancy file explorer icons
 spec "user.toggleterm"
 spec "user.bufdelete"
 -- Extras
-spec "user.extras.colorizer"
-spec "user.extras.smoothie"
+spec "user.extras.colorizer" -- translates hex colors to actual colors
+spec "user.extras.smoothie"  -- for a smooth scrolling experience
 spec "user.extras.betterescape"
 spec "user.extras.copilot"
-spec "user.extras.modicator"
-spec "user.extras.rainbow"
-spec "user.extras.matchup"
-spec "user.extras.bqf"
-spec "user.extras.dial"
-spec "user.extras.nui"
-spec "user.extras.dressing"
-spec "user.extras.surround"
-spec "user.extras.eyeliner"
-spec "user.extras.numb"
-spec "user.extras.jaq"
+spec "user.extras.modicator" -- cursor line number indicator
+spec "user.extras.rainbow"   -- rainbow parentheses powered by Treesitter
+spec "user.extras.matchup"   -- enhanced % matching
+spec "user.extras.dial"      -- enchanced increment/decrement capabilities
+spec "user.extras.nui"       -- UI for NeoVim
+spec "user.extras.dressing"  -- UI component
+spec "user.extras.surround"  -- surround text shortcuts
 spec "user.extras.navbuddy"
-spec "user.extras.minifiles"
-spec "user.extras.noice"
--- spec "user.extras.cmp-tabnine"
-spec "user.extras.lab"
-spec "user.extras.tabby"
-spec "user.extras.mason-null-ls"
--- spec "user.extras.test"
+spec "user.extras.noice"     -- replaces UI components for msgs, cmdline and popumenus
+spec "user.extras.lab"       -- interesting for debug
 spec "user.extras.typescript-tools"
-spec "user.extras.gitlinker"
-spec "user.extras.bookmark"
 spec "user.extras.harpoon"
-spec "user.extras.trailblazer"
-spec "user.extras.package-info"
 spec "user.extras.todocomments"
 spec "user.extras.trouble"
 spec "user.extras.rainbow-delimiters"
 spec "user.extras.swenv"
 spec "user.extras.markdown-preview"
 require "user.lazy"
-
--- local colors = vim.fn.getcompletion("", "color")
--- vim.cmd("colorscheme " .. colors[math.random(1, #colors)])

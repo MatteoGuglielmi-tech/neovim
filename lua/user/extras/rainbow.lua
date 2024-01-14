@@ -22,14 +22,14 @@ function M.config()
     },
     highlight = {
 
-      -- "TSRainbowRed",
+      "TSRainbowRed",
       "TSRainbowBlue",
-      -- "TSRainbowOrange",
-      -- "TSRainbowCoral",
+      "TSRainbowOrange",
+      "TSRainbowCoral",
       "TSRainbowPink",
       "TSRainbowYellow",
-      -- "TSRainbowViolet",
-      -- "TSRainbowGreen",
+      "TSRainbowViolet",
+      "TSRainbowGreen",
 
       -- TODO: define these in colorscheme
       -- "RainbowDelimiterRed",

@@ -7,13 +7,9 @@ function M.config()
   require("colorizer").setup {
     filetypes = {
       "typescript",
-      "typescriptreact",
-      "javascript",
-      "javascriptreact",
-      "css",
-      "html",
-      "astro",
       "lua",
+      "python",
+      "rust",
     },
     user_default_options = {
       names = false,

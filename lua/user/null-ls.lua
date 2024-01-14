@@ -5,12 +5,38 @@ vim.filetype.add {
   },
 }
 
-
 local M = {
-  "jose-elias-alvarez/null-ls.nvim",
+  "jay-babu/mason-null-ls.nvim",
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    "williamboman/mason.nvim",
+    "nvimtools/none-ls.nvim",
+  },
+}
+
+M.tools = {
+  -- Formatters
+  "autoflake",
+  "black",
+  "reorder-python-imports",
+  "shfmt",
+  "stylua",
+  "cbfmt",
+  -- linters
+  "pydocstyle",
+  "gitlint",
+  "shellcheck",
+  -- dap
+  "debugpy",
+  -- code actions
 }
 
 function M.config()
+  require("mason-null-ls").setup {
+    ensure_installed = M.tools,
+    automatic_installation = true,
+  }
+
   local null_ls = require "null-ls"
 
   local formatting = null_ls.builtins.formatting
@@ -83,16 +109,15 @@ function M.config()
           buffer = bufnr,
           callback = function()
             vim.lsp.buf.format({ timeout_ms = 1000000 })
-            -- NOTE: shouldn't be necessary to filter here since filetypes are defines for all lsps to attch to.
-            -- vim.lsp.buf.format {
-            --   async = false,
-            --
-            --   bufnr = bufnr,
-            --   filter = function(client)
-            --     --  only use null-ls for formatting instead of lsp server
-            --     return client.name == "null-ls"
-            --   end
-            -- }
+            vim.lsp.buf.format {
+              async = false,
+
+              bufnr = bufnr,
+              filter = function(client)
+                --  only use null-ls for formatting instead of lsp server
+                return client.name == "null-ls"
+              end
+            }
           end,
         })
       end

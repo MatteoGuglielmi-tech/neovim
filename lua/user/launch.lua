@@ -1,3 +1,4 @@
+-- utils to create table of specs for lazy loading
 LAZY_PLUGIN_SPEC = {}
 
 function spec(item)

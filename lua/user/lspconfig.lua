@@ -3,29 +3,37 @@ local M = {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "folke/neodev.nvim",
     },
   },
 }
 
-local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  local keymap = vim.api.nvim_buf_set_keymap
-  keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-end
+M.ensure_installed = {
+  "pyright",
+  "lua_ls",
+  "clangd",
+  "rust_analyzer",
+  "marksman",
+  "bashls",
+  "texlab",
+  "vimls",
+  "yamlls",
+}
 
-M.on_attach = function(client, bufnr)
-  lsp_keymaps(bufnr)
-end
+M.in_lspsettings_folder = {
+  "bashls",
+  "lua_ls",
+  "pyright",
+  "marksman",
+  "tex_lab"
+}
 
 function M.common_capabilities()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
+    -- add additional capavilities supported by nvim-cmp
     return cmp_nvim_lsp.default_capabilities()
   end
 
@@ -43,20 +51,18 @@ function M.common_capabilities()
 end
 
 function M.config()
+  require("mason").setup({ ui = { border = "rounded", } })
+  require("mason-lspconfig").setup({
+    ensure_installed = M.ensure_installed,
+  })
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"
 
-  local servers = {
-    "lua_ls",
-    "cssls",
-    "html",
-    "astro",
-    "pyright",
-    "bashls",
-    "jsonls",
-    "yamlls",
-    "marksman",
-  }
+  -- global lsp mappings
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+
+  -- INFO: local mappings are available as autocommand when the LSP attaches
 
   local default_diagnostic_config = {
     signs = {
@@ -92,7 +98,8 @@ function M.config()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
-  for _, server in pairs(servers) do
+  -- iterates over "M.in_lspsettings_folder" and loads the settings for each server
+  for _, server in pairs(M.in_lspsettings_folder) do
     local opts = {
       on_attach = M.on_attach,
       capabilities = M.common_capabilities(),

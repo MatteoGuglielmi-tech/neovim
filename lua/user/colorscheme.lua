@@ -13,7 +13,7 @@ function M.config()
     styles = {
       comments = { italic = true },
       keywords = { italic = true, underline = true },
-      functions = { bold = true },
+      functions = { bold = true, italic = true },
       variables = {},
       -- Background styles. Can be "dark", "transparent" or "normal"
       sidebars = "dark",              -- style for sidebars, see below

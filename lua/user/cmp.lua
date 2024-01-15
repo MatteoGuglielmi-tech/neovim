@@ -124,11 +124,6 @@ function M.config()
           vim_item.kind_hl_group = "CmpItemKindCopilot"
         end
 
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = icons.misc.Robot
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
-        end
-
         if entry.source.name == "crates" then
           vim_item.kind = icons.misc.Package
           vim_item.kind_hl_group = "CmpItemKindCrate"
@@ -169,15 +164,12 @@ function M.config()
         end,
       },
       { name = "luasnip" },
-      -- { name = "cmp_tabnine" },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
-      -- { name = "calc" },
       { name = "emoji" },
       { name = "treesitter" },
       { name = "crates" },
-      -- { name = "tmux" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,

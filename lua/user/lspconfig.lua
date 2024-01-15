@@ -33,7 +33,7 @@ M.in_lspsettings_folder = {
 function M.common_capabilities()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
-    -- add additional capavilities supported by nvim-cmp
+    -- add additional capabilities supported by nvim-cmp
     return cmp_nvim_lsp.default_capabilities()
   end
 

@@ -52,10 +52,10 @@ function M.config()
       -- LUA
       formatting.stylua.with { filetypes = { "lua" } },
       -- MARKDOWN
-      formatting.prettier.with {
-        filetypes = { "css", "markdown", "html", "toml" }
-        -- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-      },
+      -- formatting.prettier.with {
+      --   filetypes = { "css", "markdown", "html", "toml" }
+      --   -- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+      -- },
       formatting.cbfmt.with { filetypes = { "markdown" } },
       -- PYTHON
       formatting.black.with {

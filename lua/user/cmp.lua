@@ -46,9 +46,10 @@ function M.config()
   vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 
   local cmp = require "cmp"
-  local luasnip = require "luasnip"
+  local luasnip = require ( "luasnip" )
   require("luasnip/loaders/from_vscode").lazy_load()
-  require("luasnip").filetype_extend("typescript")
+  -- FIX: this breaks the snippet expansion
+  -- require("luasnip").filetype_extend("filetypes", "typescript")
 
   local check_backspace = function()
     local col = vim.fn.col "." - 1
@@ -146,22 +147,22 @@ function M.config()
       { name = "copilot" },
       {
         name = "nvim_lsp",
-        entry_filter = function(entry, ctx)
-          local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
-          if kind == "Snippet" and ctx.prev_context.filetype == "java" then
-            return false
-          end
-
-          if ctx.prev_context.filetype == "markdown" then
-            return true
-          end
-
-          if kind == "Text" then
-            return false
-          end
-
-          return true
-        end,
+        -- entry_filter = function(entry, ctx)
+        --   local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
+        --   if kind == "Snippet" and ctx.prev_context.filetype == "java" then
+        --     return false
+        --   end
+        --
+        --   if ctx.prev_context.filetype == "markdown" then
+        --     return true
+        --   end
+        --
+        --   if kind == "Text" then
+        --     return false
+        --   end
+        --
+        --   return true
+        -- end,
       },
       { name = "luasnip" },
       { name = "nvim_lua" },
@@ -181,7 +182,7 @@ function M.config()
         winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
         col_offset = -3,
         side_padding = 1,
-        scrollbar = false,
+        crollbar = false,
         scrolloff = 8,
       },
       documentation = {

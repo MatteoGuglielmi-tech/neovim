@@ -68,7 +68,7 @@ function M.config()
       },
 
       -- SHELL
-      formatting.shfmt.with { filetypes = { "sh", "zsh" } },
+      formatting.shfmt.with { filetypes = { "sh" } },
 
       -- diagnostics
       --  PYTHON
@@ -78,7 +78,7 @@ function M.config()
       },
 
       diagnostics.shellcheck.with {
-        filetypes = { "sh", "zsh" },
+        filetypes = { "sh" },
       },
 
       -- GITCOMMIT
@@ -89,7 +89,7 @@ function M.config()
       -- actions
       code_actions.shellcheck.with {
         command = "shellcheck",
-        filetypes = { "sh", "zsh" },
+        filetypes = { "sh" },
         argss = { "--format", "json1", "--source-path=$DIRNAME", "--external-sources", "-" },
       },
 

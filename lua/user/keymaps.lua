@@ -48,6 +48,9 @@ keymap("v", "K", ":m '<-2<CR>gv=gv")
 keymap("n", "P", '"0p', opts)  -- yanking from register 0 keeping the latest deleted text
 keymap("n", "P1", '"1p', opts) -- yanking from register 1 keeping the second latest deleted text
 keymap("x", "p", [["_dP]])
+-- yanked lines are copied to system clipboard
+-- INFO: this requires either xclip or xsel to be installed
+keymap("v", "<leader>y", [["+y]]) -- copy content from register "+ to system clipboard
 
 vim.cmd [[:amenu 10.100 mousemenu.Goto\ Definition <cmd>lua vim.lsp.buf.definition()<CR>]]
 vim.cmd [[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<CR>]]

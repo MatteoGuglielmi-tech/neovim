@@ -1,6 +1,10 @@
 local M = {
   "neogitorg/neogit",
   event = "VeryLazy",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim"
+  },
 }
 
 function M.config()

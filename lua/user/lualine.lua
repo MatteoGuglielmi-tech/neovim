@@ -1,8 +1,29 @@
 local M = {
   "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
 }
 
 function M.config()
+  -- harpoon integrations
+  local harpoon = require("harpoon.mark")
+  local function harpoon_component()
+    local total_marks = harpoon.get_length()
+
+    if total_marks == 0 then
+      return ""
+    end
+
+    local current_mark = "—"
+
+    local mark_idx = harpoon.get_current_index()
+    if mark_idx ~= nil then
+      current_mark = tostring(mark_idx)
+    end
+
+    return string.format("󱡅 %s/%d", current_mark, total_marks)
+  end
+  -----------------------
+
   local sl_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
   vim.api.nvim_set_hl(0, "Copilot", { fg = "#6CC644", bg = sl_hl.background })
   local icons = require "user.icons"
@@ -39,25 +60,30 @@ function M.config()
 
   require("lualine").setup {
     options = {
-      -- component_separators = { left = "", right = "" },
       -- section_separators = { left = "", right = "" },
-      component_separators = { left = "", right = "" },
+      globalstatus = true,
+      component_separators = { left = "", right = "" },
+      -- component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
 
       -- theme = 'tokyonight',
+      theme = "catpuccin",
+
       ignore_focus = { "NvimTree" },
     },
     sections = {
-      -- lualine_a = { {"branch", icon =""} },
-      -- lualine_b = { diff },
-      -- lualine_c = { "diagnostics" },
-      -- lualine_x = { copilot },
-      -- lualine_y = { "filetype" },
-      -- lualine_z = { "progress" },
       lualine_a = { "mode" },
-      lualine_b = { "branch" },
-      lualine_c = { diff },
-      lualine_x = { "diagnostics", copilot },
+      lualine_b = {
+        { "branch", icon = "" },
+        harpoon_component,
+        "diff",
+        "diagnostics",
+      },
+      lualine_c = {
+        { "filename", path = 1 },
+      },
+
+      lualine_x = { "encoding", copilot },
       lualine_y = { "filetype" },
       lualine_z = { "progress" },
     },

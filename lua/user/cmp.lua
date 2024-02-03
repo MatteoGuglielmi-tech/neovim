@@ -46,7 +46,7 @@ function M.config()
   vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 
   local cmp = require "cmp"
-  local luasnip = require ( "luasnip" )
+  local luasnip = require("luasnip")
   require("luasnip/loaders/from_vscode").lazy_load()
   -- FIX: this breaks the snippet expansion
   -- require("luasnip").filetype_extend("filetypes", "typescript")
@@ -191,7 +191,7 @@ function M.config()
       },
     },
     experimental = {
-      ghost_text = false,
+      ghost_text = true,
     },
   }
 

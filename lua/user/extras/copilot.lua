@@ -1,50 +1,22 @@
 local M = {
-  "zbirenbaum/copilot.lua",
-  cmd = "Copilot",
-  event = "InsertEnter",
+  "zbirenbaum/copilot-cmp",
   dependencies = {
-    "zbirenbaum/copilot-cmp",
+    {
+      "zbirenbaum/copilot.lua",
+      event = { "BufEnter" },
+      config = function()
+        -- form source : https://github.com/zbirenbaum/copilot-cmp
+        require("copilot").setup({
+          suggestion = { enabled = false },
+          panel = { enabled = false },
+        })
+      end
+    }
   },
+
+  config = function()
+    require("copilot_cmp").setup()
+  end
 }
-
-function M.config()
-  require("copilot").setup {
-    panel = {
-      keymap = {
-        jump_next = "<c-j>",
-        jump_prev = "<c-k>",
-        accept = "<c-l>",
-        refresh = "r",
-        open = "<M-CR>",
-      },
-    },
-    suggestion = {
-      enabled = true,
-      auto_trigger = true,
-      keymap = {
-        accept = "<C-y>",
-        next = "<C-j>",
-        prev = "<C-k>",
-        dismiss = "<C-h>",
-      },
-    },
-    filetypes = {
-      yaml = false,
-      markdown = true,
-      help = false,
-      gitcommit = false,
-      gitrebase = false,
-      hgcommit = false,
-      svn = false,
-      cvs = false,
-      ["."] = false,
-    },
-  }
-
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_set_keymap("n", "<C-s>", "<cmd>lua require('copilot.suggestion').toggle_auto_trigger()<CR>", opts)
-
-  require("copilot_cmp").setup()
-end
 
 return M

@@ -27,6 +27,8 @@ The configuration is designed to work with the following programming languages:
 - Lua
 - Python
 - LaTeX
+- Rust 
+- Typescript 
 
 and the following markup language:
 

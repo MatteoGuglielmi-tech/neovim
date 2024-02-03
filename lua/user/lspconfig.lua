@@ -6,8 +6,15 @@ local M = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "folke/neodev.nvim",
-    },
-  },
+      {
+        "kevinhwang91/nvim-ufo",
+        event = "BufEnter",
+        dependencies = {
+          "kevinhwang91/promise-async",
+        },
+      }
+    }
+  }
 }
 
 M.ensure_installed = {
@@ -46,6 +53,10 @@ function M.common_capabilities()
       "additionalTextEdits",
     },
   }
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
 
   return capabilities
 end
@@ -58,12 +69,7 @@ function M.config()
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"
 
-  -- global lsp mappings
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-
   -- INFO: local mappings are available as autocommand when the LSP attaches
-
   local default_diagnostic_config = {
     signs = {
       active = true,
@@ -116,6 +122,13 @@ function M.config()
 
     lspconfig[server].setup(opts)
   end
+
+  --- @diagnostic disable: unused-local
+  require("ufo").setup({
+    provider_selector = function(_bufnr, _filetype, _buftype)
+      return { "treesitter", "indent" }
+    end,
+  })
 end
 
 return M

@@ -34,19 +34,20 @@ local M = {
     },
     {
       "hrsh7th/cmp-nvim-lua",
+      "onsails/lspkind.nvim" -- allows to use icons in the completion menu
     },
   },
   event = "InsertEnter",
 }
 
+
 function M.config()
   vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-  vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
-  vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
-  vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
+  vim.api.nvim_set_hl(0, "CmpItemKindamoji", { fg = "#FDE030" })
 
   local cmp = require "cmp"
   local luasnip = require("luasnip")
+  local lspkind = require("lspkind")
   require("luasnip/loaders/from_vscode").lazy_load()
   -- FIX: this breaks the snippet expansion
   -- require("luasnip").filetype_extend("filetypes", "typescript")
@@ -109,68 +110,25 @@ function M.config()
       }),
     },
     formatting = {
-      fields = { "kind", "abbr", "menu" },
-      format = function(entry, vim_item)
-        vim_item.kind = icons.kind[vim_item.kind]
-        vim_item.menu = ({
-          nvim_lsp = "",
-          nvim_lua = "",
-          luasnip = "",
-          buffer = "",
-          path = "",
-          emoji = "",
-        })[entry.source.name]
-        if entry.source.name == "copilot" then
-          vim_item.kind = icons.git.Octoface
-          vim_item.kind_hl_group = "CmpItemKindCopilot"
-        end
-
-        if entry.source.name == "crates" then
-          vim_item.kind = icons.misc.Package
-          vim_item.kind_hl_group = "CmpItemKindCrate"
-        end
-
-        if entry.source.name == "lab.quick_data" then
-          vim_item.kind = icons.misc.CircuitBoard
-          vim_item.kind_hl_group = "CmpItemKindConstant"
-        end
-
-        if entry.source.name == "emoji" then
-          vim_item.kind = icons.misc.Smiley
-          vim_item.kind_hl_group = "CmpItemKindEmoji"
-        end
-
-        return vim_item
-      end,
+      expandable_indicator = true,
+      format = lspkind.cmp_format({
+        mode = "symbol",
+        maxwidth = 50,
+        ellipsis_char = "...",
+        symbol_map = {
+          Copilot = "",
+        },
+      }),
     },
     sources = {
       { name = "copilot" },
-      {
-        name = "nvim_lsp",
-        -- entry_filter = function(entry, ctx)
-        --   local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
-        --   if kind == "Snippet" and ctx.prev_context.filetype == "java" then
-        --     return false
-        --   end
-        --
-        --   if ctx.prev_context.filetype == "markdown" then
-        --     return true
-        --   end
-        --
-        --   if kind == "Text" then
-        --     return false
-        --   end
-        --
-        --   return true
-        -- end,
-      },
+      { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
       { name = "emoji" },
       { name = "treesitter" },
-      { name = "crates" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -191,7 +149,7 @@ function M.config()
       },
     },
     experimental = {
-      ghost_text = true,
+      ghost_text = false,
     },
   }
 

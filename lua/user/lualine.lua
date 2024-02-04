@@ -67,7 +67,7 @@ function M.config()
       section_separators = { left = "", right = "" },
 
       -- theme = 'tokyonight',
-      theme = "catpuccin",
+      theme = "catppuccin",
 
       ignore_focus = { "NvimTree" },
     },

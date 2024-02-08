@@ -35,6 +35,12 @@ keymap("n", "g*", "g*zz", opts)
 keymap("n", "g#", "g#zz", opts)
 
 -- Stay in indent mode
+-- REMIND: it is possible to tigger shortcuts for blocks
+-- bare in mind % sign allows to match blocks inside brackets
+-- ex. <action>a<isntance>. The "a" stands for action
+-- dap : deletes a paragraph
+-- <ap : indents a paragraph
+
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
@@ -56,7 +62,5 @@ vim.cmd [[:amenu 10.100 mousemenu.Goto\ Definition <cmd>lua vim.lsp.buf.definiti
 vim.cmd [[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<CR>]]
 -- vim.cmd [[:amenu 10.120 mousemenu.-sep- *]]
 
-keymap("n", "<RightMouse>", "<cmd>:popup mousemenu<CR>")
-keymap("n", "<Tab>", "<cmd>:popup mousemenu<CR>")
-
-
+-- keymap("n", "<RightMouse>", "<cmd>:popup mousemenu<CR>")
+-- keymap("n", "<Tab>", "<cmd>:popup mousemenu<CR>")

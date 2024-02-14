@@ -12,10 +12,7 @@ function M.config()
     ["o"] = { "<cmd>Navbuddy<cr>", "Nav" },
     b = {
       name = "Buffers",
-      -- j = { "<cmd>BufferLinePick<cr>", "Jump" },
       b = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-      -- b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-      -- n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
       e = {
         "<cmd>BufferLinePickClose<cr>",
         "Pick which buffer to close",
@@ -60,15 +57,12 @@ function M.config()
 
     f = {
       name = "Find",
-      -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
       c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
       f = { "<cmd>Telescope find_files<cr>", "Find files" },
-      -- p = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
       t = { "<cmd>Telescope live_grep<cr>", "Find Text" },
       s = { "<cmd>Telescope grep_string<cr>", "Find String" },
       h = { "<cmd>Telescope help_tags<cr>", "Help" },
       H = { "<cmd>Telescope highlights<cr>", "Highlights" },
-      -- i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
       l = { "<cmd>Telescope resume<cr>", "Last Search" },
       M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
       r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
@@ -101,15 +95,6 @@ function M.config()
         "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
         "Undo Stage Hunk",
       },
-
-      -- Telescope mappings for navigating git objects
-      --   o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-      --   b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-      --   h = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-      --   C = {
-      --     "<cmd>Telescope git_bcommits<cr>",
-      --     "Checkout commit(for current file)",
-      --   },
     },
     l = {
       name = "LSP",
@@ -118,12 +103,12 @@ function M.config()
       c = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
       d = { "<cmd>TroubleToggle document_diagnostics<CR>", "Document diagnostics" }, -- document diagnostics from the builtin LSP client
       D = { "<cmd>TroubleToggle lsp_definitions<CR>", "Lsp Definitions" },           -- definitions of the word under the cursor
-      -- e = { "<cmd>Telescope quickfix<CR>", "Telescope Quickfix" },
       f = {
         "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
         "Format",
       },
-      -- i = { "<cmd>Telescope lsp_implementations<CR>", "Show Implementation wuc" },   -- implementations of the word under the cursor
+      -- REMIND: not all lsps support implementations
+      i = { "<cmd>Telescope lsp_implementations<CR>", "Show Implementation wuc" },   -- implementations of the word under the cursor
       I = { "<cmd>LspInfo<cr>", "Lsp Info" },
       l = { "<cmd>TroubleToggle lsp_type_definitions<CR>", "Lsp Type Definitions" }, -- type definitions of the word under the cursor
       M = { "<cmd>Mason<cr>", "Mason Info" },
@@ -131,6 +116,7 @@ function M.config()
       q = { "<cmd>TodoTrouble<CR>", "Todo Quickfix" },
       r = { "<cmd>TroubleToggle lsp_references<CR>", "Lsp References" },             -- references of the word under the cursor
       R = { "<cmd>LspRestart<CR>", "LspRestart" },
+      s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature information wuc" },
       t = {
         '<cmd>lua require("user.functions").toggle_diagnostics()<cr>',
         "Toggle Diagnostics",
@@ -244,16 +230,10 @@ function M.config()
     show_help = true,                                                             -- show help message on the command line when the popup is visible
     show_keys = true,                                                             -- show the currently pressed key and its label as a message in the command line
     triggers = "auto",                                                            -- automatically setup triggers
-    -- triggers = {"<leader>"} -- or specify a list manually
     triggers_blacklist = {
-      -- list of mode / prefixes that should never be hooked by WhichKey
-      -- this is mostly relevant for key maps that start with a native binding
-      -- most people should not need to change this
       i = { "j", "k" },
       v = { "j", "k" },
     },
-    -- disable the WhichKey popup for certain buf types and file types.
-    -- Disabled by default for Telescope
     disable = {
       buftypes = {},
       filetypes = { "TelescopePrompt" },
@@ -273,22 +253,9 @@ function M.config()
   }
 
   local m_mappings = {
-    -- m = { "<cmd>BookmarkToggle<cr>", "Toggle" },
-    -- j = { "<cmd>BookmarkNext<cr>", "Next" },
-    -- k = { "<cmd>BookmarkPrev<cr>", "Prev" },
-    -- c = { "<cmd>BookmarkClear<cr>", "Clear" },
-    -- l = { "<cmd>BookmarkList<cr>", "List" },
-    -- f = { "<cmd>FilemarkToggle<cr>", "Mark File" },
     m = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
     ["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>', "Harpoon Next" },
     [","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', "Harpoon Prev" },
-    -- l = { "<cmd>lua require('user.bfs').open()<cr>", "Buffers" },
-    -- s = { "<cmd>Telescope harpoon marks<cr>", "Search Files" },
-    -- s = {
-    --   "<cmd>lua require('telescope').extensions.vim_bookmarks.all({ hide_filename=false, prompt_title=\"bookmarks\", shorten_path=false })<cr>",
-    --   "Show",
-    -- },
-    -- [";"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
   }
 
   which_key.register(m_mappings, m_opts)

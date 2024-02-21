@@ -23,7 +23,7 @@ M.tools = {
   "stylua",
   "cbfmt",
   -- linters
-  "pydocstyle",
+  -- "pydocstyle",
   "gitlint",
   "shellcheck",
   -- dap
@@ -72,10 +72,10 @@ function M.config()
 
       -- diagnostics
       --  PYTHON
-      diagnostics.pydocstyle.with {
-        filetypes = { "python" },
-        args = { "$FILENAME" },
-      },
+      -- diagnostics.pydocstyle.with {
+      --   filetypes = { "python" },
+      --   args = { "$FILENAME" },
+      -- },
 
       diagnostics.shellcheck.with {
         filetypes = { "sh" },

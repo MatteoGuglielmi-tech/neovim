@@ -77,15 +77,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', 'li', "<cmd>Telescope lsp_implementations<CR>", opts)
+    vim.keymap.set('n', 'lI', "<cmd>LspInfo<CR>", opts)
+    vim.keymap.set('n', 'lR', "<cmd>LspRestart<CR>", opts)
     -- this is useful when typing to get the function signature in a floating window
-    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set({ 'i', 'v' }, '<C-h>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
+    vim.keymap.set('n', 'mi', "<cmd>Mason<CR>", opts)
+
+    -- ISSUE: breaks things up
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.refereces, opts)
+
     -- this is gonna be done automatically by none-ls formatters when saving
-    -- vim.keymap.set('n', '<space>f', function()
-    --   vim.lsp.buf.format { async = true }
-    -- end, opts)
+    -- for typescript it is required
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true, filter = function(client) return client.name ~= 'typescript-tools' end }
+    end, opts)
   end,
 })

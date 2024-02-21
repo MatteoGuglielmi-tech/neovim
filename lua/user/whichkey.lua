@@ -98,25 +98,12 @@ function M.config()
     },
     l = {
       name = "LSP",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      b = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-      c = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
       d = { "<cmd>TroubleToggle document_diagnostics<CR>", "Document diagnostics" }, -- document diagnostics from the builtin LSP client
       D = { "<cmd>TroubleToggle lsp_definitions<CR>", "Lsp Definitions" },           -- definitions of the word under the cursor
-      f = {
-        "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
-        "Format",
-      },
-      -- REMIND: not all lsps support implementations
-      i = { "<cmd>Telescope lsp_implementations<CR>", "Show Implementation wuc" },   -- implementations of the word under the cursor
-      I = { "<cmd>LspInfo<cr>", "Lsp Info" },
       l = { "<cmd>TroubleToggle lsp_type_definitions<CR>", "Lsp Type Definitions" }, -- type definitions of the word under the cursor
-      M = { "<cmd>Mason<cr>", "Mason Info" },
       n = { "<cmd>ToggleRefresh<CR>", "Refresh loclist" },                           -- toggle auto loclist refresh
       q = { "<cmd>TodoTrouble<CR>", "Todo Quickfix" },
       r = { "<cmd>TroubleToggle lsp_references<CR>", "Lsp References" },             -- references of the word under the cursor
-      R = { "<cmd>LspRestart<CR>", "LspRestart" },
-      s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature information wuc" },
       t = {
         '<cmd>lua require("user.functions").toggle_diagnostics()<cr>',
         "Toggle Diagnostics",
@@ -126,7 +113,7 @@ function M.config()
       w = {
         "<cmd>TroubleToggle workspace_diagnostics<CR>",
         "Workspace disagnostics",
-      }, -- workspace diagnosticns from the builtin LSP client
+      }, -- workspace diagnostics from the builtin LSP client
     },
 
     s = {

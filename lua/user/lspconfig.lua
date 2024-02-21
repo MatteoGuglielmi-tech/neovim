@@ -69,6 +69,8 @@ function M.config()
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"
 
+  -- local handlers = require("user.handlers")
+
   -- INFO: local mappings are available as autocommand when the LSP attaches
   local default_diagnostic_config = {
     signs = {
@@ -101,7 +103,18 @@ function M.config()
   end
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+
+  -- INFO: Signature help handler --
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+    vim.lsp.handlers.signature_help,
+    {
+      border = "rounded",
+      focusable = false,
+      close_events = { "CursorMoved", "BufHidden", "InsertCharPre" }
+    }
+  )
+  ----------------------------------
+
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
   -- iterates over "M.in_lspsettings_folder" and loads the settings for each server
@@ -123,10 +136,29 @@ function M.config()
     lspconfig[server].setup(opts)
   end
 
+
+  local ftMap = {
+    python = { "indent" },
+    vim = { "indent" },
+    git = ""
+  }
+
   --- @diagnostic disable: unused-local
   require("ufo").setup({
-    provider_selector = function(_bufnr, _filetype, _buftype)
-      return { "treesitter", "indent" }
+    open_fold_hl_timeout = 150,
+    close_fold_kinds = { 'imports', 'comment' },
+    preview = {
+      mappings = {
+        scrollU = '<C-u>',
+        scrollD = '<C-d>',
+        jumpTop = '[',
+        jumpBot = ']'
+      }
+    },
+    provider_selector = function(bufnr, filetype, buftype)
+      -- if you prefer treesitter provider rather than lsp,
+      -- return ftMap[filetype] or {'treesitter', 'indent'}
+      return ftMap[filetype]
     end,
   })
 end

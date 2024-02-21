@@ -156,6 +156,16 @@ function M.config()
       i = { ":TSConfigInfo<cr>", "Info" },
     },
 
+    c = {
+      name = "Copilot",
+      a = { "<cmd>Copilot setup<CR>", "Auth" },
+      d = { "<cmd>Copilot disable<CR>", "Disable" },
+      e = { "<cmd>Copilot enable<CR>", "Enable" },
+      p = { '<cmd>lua require("copilot.panel")<CR>', "Panel" },
+      r = { '<cmd>lua reqruie("copilot.suggestion").refresh()<CR>', "Refresh" },
+      s = { '<cmd>Copilot status<CR>', "Status" },
+      t = { '<cmd>lua require("copilot.suggestion").toggle_auto_trigger()<CR>', "AutoToggle" },
+    }
   }
 
   local opts = {

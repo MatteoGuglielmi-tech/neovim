@@ -79,7 +79,7 @@ function M.config()
       },
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
-      ["<CR>"] = cmp.mapping.confirm { select = true },
+      ["<C-y>"] = cmp.mapping.confirm { select = true },
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -121,7 +121,7 @@ function M.config()
       }),
     },
     sources = {
-      { name = "copilot" },
+      -- { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "nvim_lua" },
@@ -152,6 +152,14 @@ function M.config()
       ghost_text = false,
     },
   }
+
+  cmp.event:on("menu_opened", function()
+    vim.b.copilot_suggestion_hidden = true
+  end)
+
+  cmp.event:on("menu_closed", function()
+    vim.b.copilot_suggestion_hidden = false
+  end)
 
   pcall(function()
     local function on_confirm_done(...)

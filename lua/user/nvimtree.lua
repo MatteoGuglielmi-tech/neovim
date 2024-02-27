@@ -4,13 +4,9 @@ local M = {
   dependencies = {
     "JMarkin/nvim-tree.lua-float-preview",
     lazy = true,
-    -- default
     opts = {
-      -- wrap nvimtree commands
       wrap_nvimtree_commands = true,
-      -- lines for scroll
       scroll_lines = 20,
-      -- window config
       window = {
         style = "minimal",
         relative = "win",
@@ -18,41 +14,20 @@ local M = {
         wrap = false,
       },
       mapping = {
-        -- scroll down float buffer
         down = { "<C-d>" },
-        -- scroll up float buffer
-        up = { "<C-u>" },
-        -- enable/disable float windows
-        toggle = { "<C-t>" },
+        up = { "<C-e>", "<C-u>" },
+        toggle = { "<C-x>" },
       },
-      -- hooks if return false preview doesn't shown
-      hooks = {
-        pre_open = function(path)
-          -- if file > 5 MB or not text -> not preview
-          local size = require("float-preview.utils").get_size(path)
-          if type(size) ~= "number" then
-            return false
-          end
-          local is_text = require("float-preview.utils").is_text(path)
-          return size < 5 and is_text
-        end,
-        post_open = function(bufnr)
-          return true
-        end,
-      },
-    },
+    }
   },
 }
+
 
 function M.config()
   local function my_on_attach(bufnr)
     local api = require "nvim-tree.api"
     local FloatPreview = require "float-preview"
 
-    FloatPreview.attach_nvimtree(bufnr)
-    -- local close_wrap = FloatPreview.close_wrap
-    -- vim.keymap.set("n", "<Tab>", close_wrap(api.node.open.preview), opts "Open preview")
-    -- vim.keymap.set("n", "<CR>", close_wrap(api.node.open.edit), opts "Open")
 
     local function opts(desc)
       return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -60,18 +35,25 @@ function M.config()
 
     api.config.mappings.default_on_attach(bufnr)
 
-    vim.keymap.set("n", "l", api.node.open.edit, opts "Open")
-    vim.keymap.set("n", "h", api.node.navigate.parent_close, opts "Close Directory")
-    vim.keymap.set("n", "v", api.node.open.vertical, opts "Open: Vertical Split")
-    vim.keymap.del("n", "<C-k>", { buffer = bufnr })
-    vim.keymap.set("n", "<S-k>", api.node.open.preview, opts "Open Preview")
+    FloatPreview.attach_nvimtree(bufnr)
+    local close_wrap = FloatPreview.close_wrap
+
+    vim.keymap.set("n", "<C-v>", close_wrap(api.node.open.vertical), opts("Open: Vertical Split"))
+    vim.keymap.set("n", "<C-o>", close_wrap(api.node.open.horizontal), opts("Open: Horizontal Split"))
+    vim.keymap.set("n", "l", close_wrap(api.node.open.edit), opts("Open"))
+    vim.keymap.set("n", "c", close_wrap(api.node.navigate.parent_close), opts "Close Directory")
+    vim.keymap.set("n", "<Tab>", close_wrap(api.node.open.preview), opts("Open: Preview in buffer"))
+    vim.keymap.set("n", "a", close_wrap(api.fs.create), opts("Create"))
+    vim.keymap.set("n", "d", close_wrap(api.fs.remove), opts("Delete"))
+    vim.keymap.set("n", "r", close_wrap(api.fs.rename), opts("Rename"))
   end
 
   local icons = require "user.icons"
 
   require("nvim-tree").setup {
     on_attach = my_on_attach,
-    hijack_netrw = false,
+    disable_netrw = false,
+    hijack_netrw = true, -- from nvimtree doc : It is strongly recommended to disable |netrw|
     sync_root_with_cwd = true,
     view = {
       relativenumber = true,

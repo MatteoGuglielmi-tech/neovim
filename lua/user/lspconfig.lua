@@ -6,13 +6,13 @@ local M = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "folke/neodev.nvim",
-      {
-        "kevinhwang91/nvim-ufo",
-        event = "BufEnter",
-        dependencies = {
-          "kevinhwang91/promise-async",
-        },
-      }
+      -- {
+      --   "kevinhwang91/nvim-ufo",
+      --   event = "BufEnter",
+      --   dependencies = {
+      --     "kevinhwang91/promise-async",
+      --   },
+      -- }
     }
   }
 }
@@ -144,23 +144,23 @@ function M.config()
   }
 
   --- @diagnostic disable: unused-local
-  require("ufo").setup({
-    open_fold_hl_timeout = 150,
-    close_fold_kinds = { 'imports', 'comment' },
-    preview = {
-      mappings = {
-        scrollU = '<C-u>',
-        scrollD = '<C-d>',
-        jumpTop = '[',
-        jumpBot = ']'
-      }
-    },
-    provider_selector = function(bufnr, filetype, buftype)
-      -- if you prefer treesitter provider rather than lsp,
-      -- return ftMap[filetype] or {'treesitter', 'indent'}
-      return ftMap[filetype]
-    end,
-  })
+  -- require("ufo").setup({
+  --   open_fold_hl_timeout = 150,
+  --   close_fold_kinds = { 'imports', 'comment' },
+  --   preview = {
+  --     mappings = {
+  --       scrollU = '<C-u>',
+  --       scrollD = '<C-d>',
+  --       jumpTop = '[',
+  --       jumpBot = ']'
+  --     }
+  --   },
+  --   provider_selector = function(bufnr, filetype, buftype)
+  --     -- if you prefer treesitter provider rather than lsp,
+  --     -- return ftMap[filetype] or {'treesitter', 'indent'}
+  --     return ftMap[filetype]
+  --   end,
+  -- })
 end
 
 return M

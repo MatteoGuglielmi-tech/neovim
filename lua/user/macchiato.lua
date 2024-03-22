@@ -62,7 +62,7 @@ function M.config()
       treesitter = true,
       -- treesitter_context = true,
       ts_rainbow2 = true,
-      ufo = true,
+      -- ufo = true,
       telescope = true,
       lsp_trouble = true,
       illuminate = { enabled = true, lsp = true },

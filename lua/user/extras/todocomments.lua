@@ -17,8 +17,8 @@ function M.config()
         -- signs = false, -- configure signs for some keywords individually
       },
       TODO = { icon = " ", color = "info" },
-      HACK = { icon = " ", color = "warning" },
-      WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX", "REMIND" } },
+      HACK = { icon = " ", color = "warning", alt = { "KEY" } },
+      WARN = { icon = " ", color = "warning", alt = { "WARNING", "REMIND" } },
       PERF = { icon = "", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
       NOTE = { icon = "", color = "hint", alt = { "INFO" } },
       TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },

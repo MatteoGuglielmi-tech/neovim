@@ -50,7 +50,7 @@ function M.config()
       auto_trigger = false,
       debounce = 75,
       keymap = {
-        accept = "<C-y>",
+        accept = "<C-CR>",
         accept_word = false,
         accept_line = false,
         next = "<M-j>",

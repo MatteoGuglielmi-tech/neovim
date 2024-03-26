@@ -34,7 +34,7 @@ M.in_lspsettings_folder = {
   "lua_ls",
   "pyright",
   "marksman",
-  "tex_lab"
+  "texlab"
 }
 
 function M.common_capabilities()
@@ -137,11 +137,11 @@ function M.config()
   end
 
 
-  local ftMap = {
-    python = { "indent" },
-    vim = { "indent" },
-    git = ""
-  }
+  -- local ftMap = {
+  --   python = { "indent" },
+  --   vim = { "indent" },
+  --   git = ""
+  -- }
 
   --- @diagnostic disable: unused-local
   -- require("ufo").setup({

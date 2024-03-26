@@ -10,7 +10,13 @@ local M = {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
-    "nvimtools/none-ls.nvim",
+    {
+      "nvimtools/none-ls.nvim",
+      dependencies = {
+        "gbprod/none-ls-shellcheck.nvim",
+      },
+    },
+
   },
 }
 
@@ -18,14 +24,14 @@ M.tools = {
   -- Formatters
   "autoflake",
   "black",
-  "reorder-python-imports",
+  "isort",
   "shfmt",
   "stylua",
   "cbfmt",
   -- linters
   -- "pydocstyle",
-  "gitlint",
-  "shellcheck",
+  -- "gitlint",
+  "commitlint",
   -- dap
   "debugpy",
   -- code actions
@@ -41,7 +47,7 @@ function M.config()
 
   local formatting = null_ls.builtins.formatting
   local diagnostics = null_ls.builtins.diagnostics
-  local code_actions = null_ls.builtins.code_actions
+  -- local code_actions = null_ls.builtins.code_actions
   local completion = null_ls.builtins.completion
 
   local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -51,46 +57,40 @@ function M.config()
       -- formatters
       -- LUA
       formatting.stylua.with { filetypes = { "lua" } },
+
       -- MARKDOWN
-      -- formatting.prettier.with {
-      --   filetypes = { "css", "markdown", "html", "toml" }
-      --   -- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-      -- },
       formatting.cbfmt.with { filetypes = { "markdown" } },
+
       -- PYTHON
       formatting.black.with {
         filetypes = { "python" },
         args = { "--quiet", "-", "--fast", "--line-length=80" },
       },
-
-      formatting.reorder_python_imports.with {
+      formatting.isort.with {
         filetypes = { "python" },
+        command = { "isort" },
+        args = { "--stdout", "--filename", "$FILENAME", "-" }
       },
 
       -- SHELL
       formatting.shfmt.with { filetypes = { "sh" } },
 
-      -- diagnostics
-      --  PYTHON
-      -- diagnostics.pydocstyle.with {
-      --   filetypes = { "python" },
-      --   args = { "$FILENAME" },
-      -- },
-
-      diagnostics.shellcheck.with {
+      require("none-ls-shellcheck.diagnostics").with {
         filetypes = { "sh" },
+      },
+
+      require("none-ls-shellcheck.code_actions").with {
+        command = "shellcheck",
+        filetypes = { "sh" },
+        args = { "--format", "json1", "--source-path=$DIRNAME", "--external-sources", "-" },
       },
 
       -- GITCOMMIT
-      diagnostics.gitlint.with {
-        { filetypes = { "gitcommit" }, args = { "--msg-filename", "$FILENAME" } },
-      },
-
-      -- actions
-      code_actions.shellcheck.with {
-        command = "shellcheck",
-        filetypes = { "sh" },
-        argss = { "--format", "json1", "--source-path=$DIRNAME", "--external-sources", "-" },
+      -- diagnostics.gitlint.with {
+      --   { filetypes = { "gitcommit" }, args = { "--msg-filename", "$FILENAME" } },
+      -- },
+      diagnostics.commitlint.with {
+        { filetypes = { "gitcommit" }, args = { "--format", "commitlint-format-json" } },
       },
 
       -- COMPLETION

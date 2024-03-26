@@ -1,7 +1,9 @@
 require "user.launch"
 require "user.options"
+require "user.sudo"  -- to read or write files with sudo command 
 require "user.keymaps"
 require "user.autocmds"
+
 -- spec "user.colorscheme"
 spec "user.macchiato"
 -- spec "user.tokyonight"
@@ -52,5 +54,5 @@ spec "user.extras.trouble"
 spec "user.extras.swenv"
 spec "user.extras.markdown-preview"
 -- spec "user.extras.ufo"
--- spec "user.extras.statuscol"
+spec "user.extras.statuscol"
 require "user.lazy"

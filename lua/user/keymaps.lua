@@ -34,6 +34,10 @@ keymap("n", "#", "#zz", opts)
 keymap("n", "g*", "g*zz", opts)
 keymap("n", "g#", "g#zz", opts)
 
+
+keymap('c', 'mes', "<cmd>messages<CR><esc>")
+keymap('c', 'emes', "<esc><cmd>echo v:errmsg<CR>")
+keymap('c', 'w!!', "<esc>:lua require'user.sudo'.sudo_write()<CR>", { silent = true })
 -- Stay in indent mode
 -- REMIND: it is possible to tigger shortcuts for blocks
 -- bare in mind % sign allows to match blocks inside brackets

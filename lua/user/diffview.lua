@@ -11,7 +11,7 @@ function M.config()
     view = {
       -- default = {},
       merge_tool = {
-        layout = "diff3_mixed",
+        layout = "diff4_mixed",
         disable_diagnostics = true,
         winbar_info = true,
       }
